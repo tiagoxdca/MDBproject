@@ -8,13 +8,22 @@
 
 import UIKit
 
-class MovieCell: UICollectionViewCell {
+class MovieCollectionCell: UICollectionViewCell {
     
     @IBOutlet weak var imageViewMovie: UIImageView!
     
     @IBOutlet weak var lbTitle: UILabel!
     
-    func updateCell(_with movie:Movie){
+    func updateCell(movie: Movie){
+        
+        guard let url = movie.getMovieURL() else {
+            return
+        }
+        imageViewMovie.load(url: url)
+        lbTitle.text = "\(movie.title)"
+        
+       
+        
         
     }
 }

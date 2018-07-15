@@ -18,6 +18,7 @@ class Movie: Codable {
     var overview: String
     var release_date: String
     
+    
     init(id: Int, title: String, video: Bool, poster_path: String, backdrop_path: String, overview: String, release_date: String ) {
         self.id = id
         self.title = title
@@ -32,4 +33,18 @@ class Movie: Codable {
         self.init(id: -1, title: "", video: false, poster_path: "", backdrop_path: "", overview: "", release_date: "")
     }
     
+    func getMovieURL() -> URL?{
+        return URL(string: "https://image.tmdb.org/t/p/w500\(poster_path)")
+    }
+    
 }
+
+class MovieResponse: Codable {
+
+    let results: [Movie]
+    init(results:[Movie]) {
+        self.results = results
+    }
+}
+
+
