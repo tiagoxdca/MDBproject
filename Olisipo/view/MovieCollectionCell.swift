@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class MovieCollectionCell: UICollectionViewCell {
     
@@ -19,7 +20,8 @@ class MovieCollectionCell: UICollectionViewCell {
         guard let url = movie.getMovieURL() else {
             return
         }
-        imageViewMovie.load(url: url)
+        imageViewMovie.kf.indicatorType = .activity
+        imageViewMovie.kf.setImage(with: url)
         lbTitle.text = "\(movie.title)"
         
        

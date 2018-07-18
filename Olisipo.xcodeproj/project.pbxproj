@@ -7,12 +7,16 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F13451320FCD7CB008BA0B8 /* NetWorkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F13451220FCD7CB008BA0B8 /* NetWorkManager.swift */; };
+		0F80179420FE17CE00EF46D9 /* Trailer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F80179320FE17CE00EF46D9 /* Trailer.swift */; };
+		0F80179620FE24D700EF46D9 /* TrailerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F80179520FE24D700EF46D9 /* TrailerViewController.swift */; };
 		0FA87B2E20F7949A00D2E773 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA87B2D20F7949A00D2E773 /* UIImage+Extensions.swift */; };
 		0FA87B3420F7C75200D2E773 /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA87B3320F7C75200D2E773 /* MovieDetailViewController.swift */; };
 		0FD12F8820F8E76500D5FDD2 /* MovieDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD12F8720F8E76500D5FDD2 /* MovieDetail.swift */; };
 		0FD12F8A20F8E78700D5FDD2 /* MovieTrailer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD12F8920F8E78700D5FDD2 /* MovieTrailer.swift */; };
 		0FD12F8C20F9487600D5FDD2 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD12F8B20F9487600D5FDD2 /* SearchViewController.swift */; };
 		0FD12F9020F9727D00D5FDD2 /* MovieSearchCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD12F8F20F9727D00D5FDD2 /* MovieSearchCollectionViewCell.swift */; };
+		0FDA352F20FF253E009D35D6 /* ErrorHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FDA352E20FF253E009D35D6 /* ErrorHelper.swift */; };
 		329DDB6F946B80C56332733F /* Pods_Olisipo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 935517494DDA394C2886CE9D /* Pods_Olisipo.framework */; };
 		5A45076820F744BD003B5E00 /* MovieREST.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A45076720F744BD003B5E00 /* MovieREST.swift */; };
 		5A4F73BF20F638EC007A8C02 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5A4F73BE20F638EC007A8C02 /* AppDelegate.swift */; };
@@ -25,12 +29,16 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0F13451220FCD7CB008BA0B8 /* NetWorkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetWorkManager.swift; sourceTree = "<group>"; };
+		0F80179320FE17CE00EF46D9 /* Trailer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trailer.swift; sourceTree = "<group>"; };
+		0F80179520FE24D700EF46D9 /* TrailerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailerViewController.swift; sourceTree = "<group>"; };
 		0FA87B2D20F7949A00D2E773 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		0FA87B3320F7C75200D2E773 /* MovieDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
 		0FD12F8720F8E76500D5FDD2 /* MovieDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetail.swift; sourceTree = "<group>"; };
 		0FD12F8920F8E78700D5FDD2 /* MovieTrailer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieTrailer.swift; sourceTree = "<group>"; };
 		0FD12F8B20F9487600D5FDD2 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		0FD12F8F20F9727D00D5FDD2 /* MovieSearchCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieSearchCollectionViewCell.swift; sourceTree = "<group>"; };
+		0FDA352E20FF253E009D35D6 /* ErrorHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHelper.swift; sourceTree = "<group>"; };
 		5A45076720F744BD003B5E00 /* MovieREST.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieREST.swift; sourceTree = "<group>"; };
 		5A4F73BB20F638EC007A8C02 /* Olisipo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Olisipo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		5A4F73BE20F638EC007A8C02 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -62,8 +70,17 @@
 			isa = PBXGroup;
 			children = (
 				0FA87B2D20F7949A00D2E773 /* UIImage+Extensions.swift */,
+				0F13451220FCD7CB008BA0B8 /* NetWorkManager.swift */,
 			);
 			path = extensions;
+			sourceTree = "<group>";
+		};
+		0FDA352D20FF2518009D35D6 /* helpers */ = {
+			isa = PBXGroup;
+			children = (
+				0FDA352E20FF253E009D35D6 /* ErrorHelper.swift */,
+			);
+			path = helpers;
 			sourceTree = "<group>";
 		};
 		46FE99968E04E380297E3EDB /* Pods */ = {
@@ -96,6 +113,7 @@
 		5A4F73BD20F638EC007A8C02 /* Olisipo */ = {
 			isa = PBXGroup;
 			children = (
+				0FDA352D20FF2518009D35D6 /* helpers */,
 				0FA87B2C20F7943E00D2E773 /* extensions */,
 				5A4F73D220F63940007A8C02 /* model */,
 				5A4F73D120F63935007A8C02 /* controller */,
@@ -124,6 +142,7 @@
 				5A4F73BE20F638EC007A8C02 /* AppDelegate.swift */,
 				0FA87B3320F7C75200D2E773 /* MovieDetailViewController.swift */,
 				0FD12F8B20F9487600D5FDD2 /* SearchViewController.swift */,
+				0F80179520FE24D700EF46D9 /* TrailerViewController.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -135,6 +154,7 @@
 				5A45076720F744BD003B5E00 /* MovieREST.swift */,
 				0FD12F8720F8E76500D5FDD2 /* MovieDetail.swift */,
 				0FD12F8920F8E78700D5FDD2 /* MovieTrailer.swift */,
+				0F80179320FE17CE00EF46D9 /* Trailer.swift */,
 			);
 			path = model;
 			sourceTree = "<group>";
@@ -181,6 +201,7 @@
 				TargetAttributes = {
 					5A4F73BA20F638EC007A8C02 = {
 						CreatedOnToolsVersion = 9.4.1;
+						LastSwiftMigration = 0940;
 					};
 				};
 			};
@@ -225,12 +246,14 @@
 				"${SRCROOT}/Pods/Target Support Files/Pods-Olisipo/Pods-Olisipo-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
 				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
+				"${BUILT_PRODUCTS_DIR}/ReachabilitySwift/Reachability.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Reachability.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -265,12 +288,16 @@
 			files = (
 				5A4F73C120F638EC007A8C02 /* LastReleasesViewController.swift in Sources */,
 				5A4F73BF20F638EC007A8C02 /* AppDelegate.swift in Sources */,
+				0F80179620FE24D700EF46D9 /* TrailerViewController.swift in Sources */,
+				0F80179420FE17CE00EF46D9 /* Trailer.swift in Sources */,
+				0FDA352F20FF253E009D35D6 /* ErrorHelper.swift in Sources */,
 				0FD12F8A20F8E78700D5FDD2 /* MovieTrailer.swift in Sources */,
 				0FD12F9020F9727D00D5FDD2 /* MovieSearchCollectionViewCell.swift in Sources */,
 				0FA87B2E20F7949A00D2E773 /* UIImage+Extensions.swift in Sources */,
 				5A45076820F744BD003B5E00 /* MovieREST.swift in Sources */,
 				0FD12F8C20F9487600D5FDD2 /* SearchViewController.swift in Sources */,
 				5A4F73D820F6407D007A8C02 /* Movie.swift in Sources */,
+				0F13451320FCD7CB008BA0B8 /* NetWorkManager.swift in Sources */,
 				0FD12F8820F8E76500D5FDD2 /* MovieDetail.swift in Sources */,
 				0FA87B3420F7C75200D2E773 /* MovieDetailViewController.swift in Sources */,
 				5A4F73D620F63B49007A8C02 /* MovieCollectionCell.swift in Sources */,
@@ -418,6 +445,7 @@
 			baseConfigurationReference = E5CA1DE3A8568F7DC299A8BB /* Pods-Olisipo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Olisipo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -426,6 +454,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = pt.guimaraes.Olisipo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -436,6 +465,7 @@
 			baseConfigurationReference = DF0555F92887DCFD844A2A43 /* Pods-Olisipo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = Olisipo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (

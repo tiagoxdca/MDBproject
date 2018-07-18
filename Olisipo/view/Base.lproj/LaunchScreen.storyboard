@@ -18,16 +18,58 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="olisipo" translatesAutoresizingMaskIntoConstraints="NO" id="zO8-SY-rBS">
-                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                            </imageView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Fos-Vw-N1c">
+                                <rect key="frame" x="-0.5" y="258" width="375" height="150"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="The Movie DB" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="16" translatesAutoresizingMaskIntoConstraints="NO" id="MY8-pM-skG">
+                                        <rect key="frame" x="7.5" y="0.0" width="359" height="150"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <fontDescription key="fontDescription" type="system" weight="black" pointSize="25"/>
+                                        <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="kKY-Ov-lV8"/>
+                                </constraints>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="6io-Dx-eXg">
+                                <rect key="frame" x="8" y="20" width="359" height="230"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="AntMan" translatesAutoresizingMaskIntoConstraints="NO" id="Avd-Mz-rH3">
+                                        <rect key="frame" x="0.0" y="0.0" width="175.5" height="230"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="thePurge" translatesAutoresizingMaskIntoConstraints="NO" id="xCS-ZU-Zxe">
+                                        <rect key="frame" x="183.5" y="0.0" width="175.5" height="230"/>
+                                    </imageView>
+                                </subviews>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="8" translatesAutoresizingMaskIntoConstraints="NO" id="TKL-RD-Xol">
+                                <rect key="frame" x="8" y="416" width="359" height="243"/>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="rampage" translatesAutoresizingMaskIntoConstraints="NO" id="h4v-YL-xfl">
+                                        <rect key="frame" x="0.0" y="0.0" width="175.5" height="243"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="jurassicWorld" translatesAutoresizingMaskIntoConstraints="NO" id="tIo-u3-6jd">
+                                        <rect key="frame" x="183.5" y="0.0" width="175.5" height="243"/>
+                                    </imageView>
+                                </subviews>
+                            </stackView>
                         </subviews>
-                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="zO8-SY-rBS" firstAttribute="top" secondItem="Ze5-6b-2t3" secondAttribute="top" id="Hru-17-GZL"/>
-                            <constraint firstItem="zO8-SY-rBS" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="QFF-HX-LOS"/>
-                            <constraint firstItem="zO8-SY-rBS" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="RC2-9C-AqH"/>
-                            <constraint firstItem="zO8-SY-rBS" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="Rga-x8-nyL"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="6io-Dx-eXg" secondAttribute="trailing" constant="8" id="0LI-DY-4D1"/>
+                            <constraint firstItem="Fos-Vw-N1c" firstAttribute="centerY" secondItem="Ze5-6b-2t3" secondAttribute="centerY" id="6z9-fQ-TgH"/>
+                            <constraint firstItem="6io-Dx-eXg" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Akp-ke-MOw"/>
+                            <constraint firstItem="Fos-Vw-N1c" firstAttribute="width" secondItem="Ze5-6b-2t3" secondAttribute="width" id="Awv-rN-sdj"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="TKL-RD-Xol" secondAttribute="trailing" constant="8" id="DUk-RI-a0S"/>
+                            <constraint firstItem="6io-Dx-eXg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="JJj-sF-Bhu"/>
+                            <constraint firstItem="Fos-Vw-N1c" firstAttribute="centerX" secondItem="Ze5-6b-2t3" secondAttribute="centerX" id="Lz4-2g-QSi"/>
+                            <constraint firstItem="TKL-RD-Xol" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="McE-BM-ekZ"/>
+                            <constraint firstItem="TKL-RD-Xol" firstAttribute="top" secondItem="Fos-Vw-N1c" secondAttribute="bottom" constant="8" id="S0E-eh-atg"/>
+                            <constraint firstItem="Fos-Vw-N1c" firstAttribute="top" secondItem="6io-Dx-eXg" secondAttribute="bottom" constant="8" id="cpT-kv-9PR"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="TKL-RD-Xol" secondAttribute="bottom" constant="8" id="yUv-4u-2tL"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -38,6 +80,9 @@
         </scene>
     </scenes>
     <resources>
-        <image name="olisipo" width="750" height="1334"/>
+        <image name="AntMan" width="300" height="450"/>
+        <image name="jurassicWorld" width="300" height="450"/>
+        <image name="rampage" width="300" height="450"/>
+        <image name="thePurge" width="300" height="450"/>
     </resources>
 </document>

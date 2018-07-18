@@ -39,9 +39,9 @@ class MovieREST {
     
     
     //MARK: METHODS
-    class func getMovieDetailsById(movie:Movie, onComplete: @escaping (MovieDetail) -> Void, onError: @escaping (MovieError) -> Void){
+    class func getMovieDetailsById(id: Int, onComplete: @escaping (MovieDetail) -> Void, onError: @escaping (MovieError) -> Void){
         
-        guard let url = getUrlMovieDetail(id: movie.id) else { onError(.url); return}
+        guard let url = getUrlMovieDetail(id: id) else { onError(.url); return}
         let dataTask = session.dataTask(with: url){ (data:Data?, response: URLResponse?, error:Error?) in
             
             if error == nil {
@@ -72,7 +72,7 @@ class MovieREST {
     }
     
     class func getMovieByTitle(title: String?, onComplete: @escaping ([MovieDetail]) -> Void, onError: @escaping (MovieError) -> Void) {
-        guard let url = self.getURLMovieTitle(title: title) else {
+        guard let url = self.getURLMovieByTitle(title: title) else {
             onError(.url)
             return
         }
@@ -89,7 +89,6 @@ class MovieREST {
                     guard let data = data else {return}
                     do{
                         let movieDetail = try JSONDecoder().decode(MovieResponseDetail.self, from:data).results
-                        print(movieDetail)
                         onComplete(movieDetail)
                         
                     } catch {
@@ -105,9 +104,44 @@ class MovieREST {
         }
         
         dataTask.resume()
+    }
+    
+    class func getNowPlaying(onComplete: @escaping ([MovieDetail]) -> Void, onError: @escaping (MovieError) -> Void){
+        let urlString = "https://api.themoviedb.org/3/movie/now_playing?api_key=\(API_KEY)&language=en-US&page=1"
+        guard let url = URL(string: urlString) else {return}
         
+        Alamofire.request(url).response { (response) in
+            
+            
+            guard let data = response.data,
+                let movies = try? JSONDecoder().decode(MovieResponseDetail.self, from: data).results else {
+                    onError(.invalidJSON)
+                    return
+                }
+            onComplete(movies)
+            
+        }
         
+    }
+    
+    class func getTopRatedMovies(onComplete: @escaping ([MovieDetail]) -> Void, onError: @escaping (MovieError) -> Void){
         
+        guard let url = self.getTopRatedURL() else {
+            onError(.url)
+            return}
+        
+        Alamofire.request(url).response { (response) in
+            
+            
+            guard let data = response.data,
+                let movies = try? JSONDecoder().decode(MovieResponseDetail.self, from: data).results else {
+                    onError(.invalidJSON)
+                    return
+            }
+            
+            onComplete(movies)
+            
+        }
     }
     
     class func getLastReleases(onComplete: @escaping ([Movie]) -> Void, onError: @escaping (MovieError) -> Void) {
@@ -145,10 +179,49 @@ class MovieREST {
         
     }
     
-    class func getURLMovieTitle(title:String?) -> URL? {
-        guard let name = title?.replacingOccurrences(of: " ", with: "") else {return nil}
+    
+    class func getMovieTrailer(id:Int, onComplete: @escaping (Trailer?) -> Void, onError: @escaping (MovieError) -> Void){
         
-        let stringURL = "https://api.themoviedb.org/3/search/movie?api_key=\(API_KEY)&query=\(name)&page=1"
+        guard let url = self.getUrlTrailer(id: id) else {
+            onError(.url)
+            return}
+        
+        Alamofire.request(url).response { (response) in
+            guard let data = response.data,
+                let trailer = try? JSONDecoder().decode(TrailerResponse.self, from: data).results! else {
+                    onError(.invalidJSON)
+                    return
+                }
+            if let trailer = trailer.first {
+                onComplete(trailer)
+            } else {
+                onComplete(nil)
+            }
+            
+        }
+    }
+    
+    
+    
+    class func getURLMovieByTitle(title:String?) -> URL? {
+        let name = title?.addingPercentEncoding(withAllowedCharacters: .urlPathAllowed)
+        if let name = name {
+            let stringURL = "https://api.themoviedb.org/3/search/movie?api_key=\(API_KEY)&query=\(name)&page=1"
+            guard let url = URL(string: stringURL) else {return nil}
+            return url
+        }
+        return nil
+    }
+    
+    class func getUrlTrailer(id: Int) -> URL? {
+        let stringURL = "https://api.themoviedb.org/3/movie/\(id)/videos?api_key=7d8f773c003172eb742122984b193864&language=en-US"
+        
+        guard let url = URL(string: stringURL) else {return nil}
+        return url
+    }
+    
+    class func getTopRatedURL() -> URL?{
+        let stringURL = "https://api.themoviedb.org/3/movie/top_rated?api_key=\(API_KEY)&language=en-US&page=1"
         
         guard let url = URL(string: stringURL) else {return nil}
         return url
@@ -187,19 +260,7 @@ class MovieREST {
         return urlComponents.url
     }
     
-    class func configureMessageError(error: MovieError) -> String{
-        var stringError = ""
-        switch error {
-        case .invalidJSON:
-            stringError = "Json is invalid..."
-        case .url:
-            stringError = "Your url is invalid..."
-        default:
-            stringError = "There was some problem with your json..."
-        }
-        
-        return stringError
-    }
+   
     
     
     

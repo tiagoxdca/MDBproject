@@ -7,63 +7,46 @@
 //
 
 import UIKit
+import SystemConfiguration
 
 class LastReleasesViewController: UIViewController {
     
+    let network = NetworkManager.sharedInstance
+   
+    
     
     @IBOutlet weak var collectionView: UICollectionView!
-    
     @IBOutlet weak var lbError: UILabel!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var imgNoConnection: UIImageView!
+    
+    
     var movies: [Movie] = [Movie]()
     var movie: Movie?
     
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let width = (view.frame.size.width - 6) / 3
-        let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        layout.itemSize = CGSize(width: width, height: width)
-        self.collectionView.alpha = 0
-        
-       
+        preparePresentation()
     }
-
+    
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        MovieREST.getLastReleases(onComplete: { (movies) in
-            self.movies = movies
-            DispatchQueue.main.async {
-                
-                self.collectionView.reloadData()
-                self.loadAnimation()
-                
-            }
-            
-        }) { (error) in
-            self.showMovieError(error: error)
-        }
+        testConnection()
     }
     
     func loadAnimation(){
-        UIView.animate(withDuration: 3, animations: {
+        UIView.animate(withDuration: 1, animations: {
             self.activityIndicator.stopAnimating()
             self.activityIndicator.alpha = 0
             self.collectionView.alpha = 1
-            self.lbError.alpha = 0
+            
         })
     }
     
-    func showMovieError(error: MovieError){
-        let alert = UIAlertController(title: "You have some error?", message: "\(MovieREST.configureMessageError(error: error))", preferredStyle: .alert)
-        let cancelAction = UIAlertAction(title: "Ok", style: .default)
-        alert.addAction(cancelAction)
-        self.present(alert, animated: true, completion: nil)
-        
-    }
+   
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -73,24 +56,64 @@ class LastReleasesViewController: UIViewController {
                 detailVC.movie = self.movies[index.item]
             }
         }
-        
-//        if let vc = segue.destination as? MovieDetailViewController,
-//            let index = collectionView.indexPathsForSelectedItems?.first {
-//               vc.movie = self.movies[index.item]
-//        }
-        
     }
     
     
     
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    fileprivate func testConnection() {
+        NetworkManager.isReachable { (manager) in
+            self.showLastReleases()
+            self.imgNoConnection.alpha = 0
+            self.collectionView.alpha = 1
+        }
+        NetworkManager.isUnreachable { (manager) in
+            self.imgNoConnection.alpha = 1
+            self.collectionView.alpha = 0
+            self.activityIndicator.stopAnimating()
+        }
         
+        network.reachability.whenReachable = { _ in
+            self.showLastReleases()
+            self.imgNoConnection.alpha = 0
+            
+        }
         
-        
-        
+        network.reachability.whenUnreachable = { reachability in
+            UIView.animate(withDuration: 1, animations: {
+                self.collectionView.alpha = 0
+                self.imgNoConnection.alpha = 1
+            })
+        }
+    }
+    
+    
+    fileprivate func showLastReleases() {
+        MovieREST.getLastReleases(onComplete: { (movies) in
+            self.movies = movies
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+                self.activityIndicator.stopAnimating()
+                self.loadAnimation()
+            }
+            
+        }) { (error) in
+            ErrorHelper.showMovieError(controller: self, error: error)
+        }
+    }
+    
+    fileprivate func preparePresentation() {
+        let width = (view.frame.size.width - 6) / 3
+        let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
+        layout.itemSize = CGSize(width: width, height: width * 1.5)
+        self.collectionView.alpha = 0
     }
 
 }
+
+
+
+
+
 
 extension LastReleasesViewController: UICollectionViewDelegate, UICollectionViewDataSource {
     
@@ -105,7 +128,8 @@ extension LastReleasesViewController: UICollectionViewDelegate, UICollectionView
         return cell
     }
     
-    
 }
+
+
 
 
