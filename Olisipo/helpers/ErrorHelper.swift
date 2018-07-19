@@ -26,6 +26,8 @@ class ErrorHelper {
             stringError = "Json is invalid..."
         case .url:
             stringError = "Your url is invalid..."
+        case .noInternet:
+            stringError = "No Internet connection..."
         default:
             stringError = "There was some problem with your json..."
         }

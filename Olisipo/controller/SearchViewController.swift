@@ -20,11 +20,13 @@ class SearchViewController: UIViewController {
     var imagesPlaying: [UIImage] = []
     var indexImage: Int = 0
     var timer: Timer!
+    var isReachable: Bool = false
     
     
     
     
-   
+
+    
     @IBOutlet weak var noConnection: UIView!
     
     @IBOutlet weak var cTop: NSLayoutConstraint!
@@ -42,16 +44,20 @@ class SearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        testConnection()
         self.loadNowPlaying()
-        
-        
         
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        testConnection()
-        self.loadTopRatedMovies()
+        
+        if isReachable {
+            self.noConnection.alpha = 0
+            self.loadTopRatedMovies()
+        } else {
+            self.noConnection.alpha = 1
+        }
         self.selectionMoviesLabel.text = "↓ Top Rated Movies"
         noResultsLabel.alpha = 0
         
@@ -60,18 +66,18 @@ class SearchViewController: UIViewController {
     
     
     func loadNowPlaying(){
-        MovieREST.getNowPlaying(onComplete: { (movies) in
-            self.nowPlayingMovies = movies
-            
-            self.loadImagesNowPlaying(movies: movies)
-           
-            DispatchQueue.main.async {
+        
+        if isReachable {
+            MovieREST.getNowPlaying(onComplete: { (movies) in
+                self.nowPlayingMovies = movies
+                self.loadImagesNowPlaying(movies: movies)
+                DispatchQueue.main.async {
+                   self.startAnimation()
+                }
                 
-               self.startAnimation()
+            }) { (error) in
+                ErrorHelper.showMovieError(controller: self, error: error)
             }
-            
-        }) { (error) in
-            print("Ocorreu um erro")
         }
     }
     
@@ -135,19 +141,25 @@ class SearchViewController: UIViewController {
     fileprivate func testConnection() {
         
         NetworkManager.isReachable { (manager) in
-            self.noConnection.alpha = 0
+            self.isReachable = true
         }
+        
         NetworkManager.isUnreachable { (manager) in
-            self.noConnection.alpha = 1
+            self.isReachable = false
         }
+        
         
         network.reachability.whenReachable = { _ in
             UIView.animate(withDuration: 1, animations: {
+                self.isReachable = true
+                self.loadNowPlaying()
+                self.loadTopRatedMovies()
                 self.noConnection.alpha = 0
             })
         }
         network.reachability.whenUnreachable = { reachability in
             UIView.animate(withDuration: 1, animations: {
+                self.isReachable = false
                  self.noConnection.alpha = 1
             })
         }
@@ -198,7 +210,6 @@ extension SearchViewController: UISearchBarDelegate, UICollectionViewDelegate, U
     }
     
     
-    
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         
@@ -235,13 +246,13 @@ extension SearchViewController: UISearchBarDelegate, UICollectionViewDelegate, U
         self.selectionMoviesLabel.text = "↓ your selection"
     }
     
-   
-    
-    
-    
-    
-    
-    
-    
 }
+    
+    
+    
+    
+    
+    
+    
+
 

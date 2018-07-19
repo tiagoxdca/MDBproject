@@ -18,6 +18,7 @@ enum MovieError{
     case noData
     case responseStatusCode(code: Int)
     case invalidJSON
+    case noInternet
 }
 
 class MovieREST {

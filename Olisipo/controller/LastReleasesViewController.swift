@@ -103,8 +103,10 @@ class LastReleasesViewController: UIViewController {
     
     fileprivate func preparePresentation() {
         let width = (view.frame.size.width - 6) / 3
+        //let height = width * 1.5
+        let height = (view.frame.size.height) / 3
         let layout = collectionView.collectionViewLayout as! UICollectionViewFlowLayout
-        layout.itemSize = CGSize(width: width, height: width * 1.5)
+        layout.itemSize = CGSize(width: width, height: height)
         self.collectionView.alpha = 0
     }
 
@@ -126,6 +128,18 @@ extension LastReleasesViewController: UICollectionViewDelegate, UICollectionView
         movie = movies[indexPath.row]
         cell.updateCell(movie: movie!)
         return cell
+    }
+    
+    
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        
+        let rotationAngleInRadians = 90.0 * CGFloat(Double.pi/180)
+        let rotationTransform = CATransform3DMakeRotation(rotationAngleInRadians, 0, 0, 1)
+        cell.layer.transform = rotationTransform
+        
+        UIView.animate(withDuration: 0.5) {
+            cell.layer.transform = CATransform3DIdentity
+        }
     }
     
 }

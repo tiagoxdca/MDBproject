@@ -11,6 +11,10 @@ import Kingfisher
 
 class MovieSearchCollectionViewCell: UICollectionViewCell {
     
+    
+
+    @IBOutlet weak var trailingCell: NSLayoutConstraint!
+    
     @IBOutlet weak var imgMovie: UIImageView!
     
     @IBOutlet weak var movieSearchTitle: UILabel!
@@ -24,7 +28,10 @@ class MovieSearchCollectionViewCell: UICollectionViewCell {
         imgMovie.kf.setImage(with: url)
         imgMovie.layer.cornerRadius = imgMovie.frame.size.width / 2
         imgMovie.layer.borderColor = UIColor.red.cgColor
+        
     }
+    
+    
     
     
     
