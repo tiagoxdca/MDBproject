@@ -18,6 +18,10 @@ class MovieCollectionCell: UICollectionViewCell {
     func updateCell(movie: Movie){
         
         guard let url = movie.getMovieURL() else {
-            ©√Ω returnsdpOJCÇXB -,        
-    }
+aS    }asaSaSasaSvjbak ,sdKM	WF
+Vdsf<fdz
+Hn
+Bad
+B 
+Sff
 }
