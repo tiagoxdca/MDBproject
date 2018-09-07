@@ -24,7 +24,11 @@ class MovieCollectionCell: UICollectionViewCell {
         imageViewMovie.kf.setImage(with: url)
         lbTitle.text = "\(movie.title)"
         
-       
+       <sdijnklgfsb<
+´~\FEdvZ\
+gwrSBCX
+\GEWdvsC
+Xgwvsx gsbf< \zfghwlºp
         
         
     }
