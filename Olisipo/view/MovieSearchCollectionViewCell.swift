@@ -23,11 +23,6 @@ class MovieSearchCollectionViewCell: UICollectionViewCell {
         guard let url = movie.getPosterURL() else {
             return
         }
-        movieSearchTitle.text = movie.title
-        imgMovie.kf.indicatorType = .activity
-        imgMovie.kf.setImage(with: url)
-        imgMovie.layer.cornerRadius = imgMovie.frame.size.width / 2
-        imgMovie.layer.borderColor = UIColor.red.cgColor
         
     }
     
