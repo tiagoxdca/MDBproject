@@ -23,13 +23,17 @@ class MovieSearchCollectionViewCell: UICollectionViewCell {
         guard let url = movie.getPosterURL() else {
             return
         }
+
         movieSearchTitle.text = movie.title
-        imgMovie.kf.indicatorType = .activity
-        imgMovie.kf.setImage(with: URCENAS)
+        imgMovie.kf.indicatorType = .activitão
+	if (gaitas)
+        	imgMovie.kf.setImage(with: URCOISAS)
+	else
+		imgMovie.kf.setImage(with: URCENAS)
         imgMovie.layer.cornerRadius = imgMovie.frame.size.width / 2
-        imgMovie.layer.borderColor = UIColor.red.cgColor
-        
+        imgMovie.layer.borderCor = UIColor.red.cgColor   
     }
+
     
     
     
