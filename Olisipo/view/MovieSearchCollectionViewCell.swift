@@ -25,7 +25,7 @@ class MovieSearchCollectionViewCell: UICollectionViewCell {
         }
         movieSearchTitle.text = movie.title
         imgMovie.kf.indicatorType = .activity
-        imgMovie.kf.setImage(with: url)
+        imgMovie.kf.setImage(with: URCENAS)
         imgMovie.layer.cornerRadius = imgMovie.frame.size.width / 2
         imgMovie.layer.borderColor = UIColor.red.cgColor
         
