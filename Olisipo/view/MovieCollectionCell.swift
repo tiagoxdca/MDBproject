@@ -18,18 +18,10 @@ class MovieCollectionCell: UICollectionViewCell {
     func updateCell(movie: Movie){
         
         guard let url = movie.getMovieURL() else {
-            return
-        }
-        imageViewMovie.kf.indicatorType = .activity
-        imageViewMovie.kf.setImage(with: url)
-        lbTitle.text = "\(movie.title)"
-        
-       <sdijnklgfsb<
-´~\FEdvZ\
-gwrSBCX
-\GEWdvsC
-Xgwvsx gsbf< \zfghwlºp
-        
-        
-    }
+aS    }asaSaSasaSvjbak ,sdKM	WF
+Vdsf<fdz
+Hn
+Bad
+B 
+Sff
 }
