@@ -7,9 +7,13 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0F0C27C5211F04F900CEC8BF /* ViewController+CoreData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F0C27C4211F04F900CEC8BF /* ViewController+CoreData.swift */; };
 		0F13451320FCD7CB008BA0B8 /* NetWorkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F13451220FCD7CB008BA0B8 /* NetWorkManager.swift */; };
 		0F80179420FE17CE00EF46D9 /* Trailer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F80179320FE17CE00EF46D9 /* Trailer.swift */; };
 		0F80179620FE24D700EF46D9 /* TrailerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F80179520FE24D700EF46D9 /* TrailerViewController.swift */; };
+		0F8D47A721144FA500552BF9 /* FavoritesTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8D47A621144FA500552BF9 /* FavoritesTableViewController.swift */; };
+		0F8D47A92114508900552BF9 /* FavoriteMovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F8D47A82114508900552BF9 /* FavoriteMovieCell.swift */; };
+		0F8D47CD2114533400552BF9 /* DataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0F8D47CB2114533400552BF9 /* DataModel.xcdatamodeld */; };
 		0FA87B2E20F7949A00D2E773 /* UIImage+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA87B2D20F7949A00D2E773 /* UIImage+Extensions.swift */; };
 		0FA87B3420F7C75200D2E773 /* MovieDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FA87B3320F7C75200D2E773 /* MovieDetailViewController.swift */; };
 		0FD12F8820F8E76500D5FDD2 /* MovieDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0FD12F8720F8E76500D5FDD2 /* MovieDetail.swift */; };
@@ -29,9 +33,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0F0C27C4211F04F900CEC8BF /* ViewController+CoreData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ViewController+CoreData.swift"; sourceTree = "<group>"; };
 		0F13451220FCD7CB008BA0B8 /* NetWorkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetWorkManager.swift; sourceTree = "<group>"; };
 		0F80179320FE17CE00EF46D9 /* Trailer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trailer.swift; sourceTree = "<group>"; };
 		0F80179520FE24D700EF46D9 /* TrailerViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailerViewController.swift; sourceTree = "<group>"; };
+		0F8D47A621144FA500552BF9 /* FavoritesTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTableViewController.swift; sourceTree = "<group>"; };
+		0F8D47A82114508900552BF9 /* FavoriteMovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteMovieCell.swift; sourceTree = "<group>"; };
+		0F8D47CC2114533400552BF9 /* DataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = DataModel.xcdatamodel; sourceTree = "<group>"; };
 		0FA87B2D20F7949A00D2E773 /* UIImage+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+Extensions.swift"; sourceTree = "<group>"; };
 		0FA87B3320F7C75200D2E773 /* MovieDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailViewController.swift; sourceTree = "<group>"; };
 		0FD12F8720F8E76500D5FDD2 /* MovieDetail.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetail.swift; sourceTree = "<group>"; };
@@ -79,6 +87,7 @@
 			isa = PBXGroup;
 			children = (
 				0FDA352E20FF253E009D35D6 /* ErrorHelper.swift */,
+				0F0C27C4211F04F900CEC8BF /* ViewController+CoreData.swift */,
 			);
 			path = helpers;
 			sourceTree = "<group>";
@@ -131,6 +140,7 @@
 				5A4F73C220F638EC007A8C02 /* Main.storyboard */,
 				5A4F73C720F638EF007A8C02 /* LaunchScreen.storyboard */,
 				0FD12F8F20F9727D00D5FDD2 /* MovieSearchCollectionViewCell.swift */,
+				0F8D47A82114508900552BF9 /* FavoriteMovieCell.swift */,
 			);
 			path = view;
 			sourceTree = "<group>";
@@ -138,11 +148,12 @@
 		5A4F73D120F63935007A8C02 /* controller */ = {
 			isa = PBXGroup;
 			children = (
-				5A4F73C020F638EC007A8C02 /* LastReleasesViewController.swift */,
 				5A4F73BE20F638EC007A8C02 /* AppDelegate.swift */,
+				5A4F73C020F638EC007A8C02 /* LastReleasesViewController.swift */,
 				0FA87B3320F7C75200D2E773 /* MovieDetailViewController.swift */,
 				0FD12F8B20F9487600D5FDD2 /* SearchViewController.swift */,
 				0F80179520FE24D700EF46D9 /* TrailerViewController.swift */,
+				0F8D47A621144FA500552BF9 /* FavoritesTableViewController.swift */,
 			);
 			path = controller;
 			sourceTree = "<group>";
@@ -150,6 +161,7 @@
 		5A4F73D220F63940007A8C02 /* model */ = {
 			isa = PBXGroup;
 			children = (
+				0F8D47CB2114533400552BF9 /* DataModel.xcdatamodeld */,
 				5A4F73D720F6407D007A8C02 /* Movie.swift */,
 				5A45076720F744BD003B5E00 /* MovieREST.swift */,
 				0FD12F8720F8E76500D5FDD2 /* MovieDetail.swift */,
@@ -201,7 +213,7 @@
 				TargetAttributes = {
 					5A4F73BA20F638EC007A8C02 = {
 						CreatedOnToolsVersion = 9.4.1;
-						LastSwiftMigration = 0940;
+						LastSwiftMigration = 1000;
 					};
 				};
 			};
@@ -289,6 +301,7 @@
 				5A4F73C120F638EC007A8C02 /* LastReleasesViewController.swift in Sources */,
 				5A4F73BF20F638EC007A8C02 /* AppDelegate.swift in Sources */,
 				0F80179620FE24D700EF46D9 /* TrailerViewController.swift in Sources */,
+				0F8D47A721144FA500552BF9 /* FavoritesTableViewController.swift in Sources */,
 				0F80179420FE17CE00EF46D9 /* Trailer.swift in Sources */,
 				0FDA352F20FF253E009D35D6 /* ErrorHelper.swift in Sources */,
 				0FD12F8A20F8E78700D5FDD2 /* MovieTrailer.swift in Sources */,
@@ -297,8 +310,11 @@
 				5A45076820F744BD003B5E00 /* MovieREST.swift in Sources */,
 				0FD12F8C20F9487600D5FDD2 /* SearchViewController.swift in Sources */,
 				5A4F73D820F6407D007A8C02 /* Movie.swift in Sources */,
+				0F0C27C5211F04F900CEC8BF /* ViewController+CoreData.swift in Sources */,
+				0F8D47A92114508900552BF9 /* FavoriteMovieCell.swift in Sources */,
 				0F13451320FCD7CB008BA0B8 /* NetWorkManager.swift in Sources */,
 				0FD12F8820F8E76500D5FDD2 /* MovieDetail.swift in Sources */,
+				0F8D47CD2114533400552BF9 /* DataModel.xcdatamodeld in Sources */,
 				0FA87B3420F7C75200D2E773 /* MovieDetailViewController.swift in Sources */,
 				5A4F73D620F63B49007A8C02 /* MovieCollectionCell.swift in Sources */,
 			);
@@ -447,7 +463,9 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8Z6U63HDB4;
 				INFOPLIST_FILE = Olisipo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -455,7 +473,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = pt.guimaraes.Olisipo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
@@ -467,14 +485,16 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 8Z6U63HDB4;
 				INFOPLIST_FILE = Olisipo/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = pt.guimaraes.Olisipo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 4.0;
+				SWIFT_VERSION = 4.2;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
@@ -501,6 +521,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		0F8D47CB2114533400552BF9 /* DataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				0F8D47CC2114533400552BF9 /* DataModel.xcdatamodel */,
+			);
+			currentVersion = 0F8D47CC2114533400552BF9 /* DataModel.xcdatamodel */;
+			path = DataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 5A4F73B320F638EC007A8C02 /* Project object */;
 }

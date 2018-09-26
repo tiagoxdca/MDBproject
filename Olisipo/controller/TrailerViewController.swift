@@ -7,19 +7,27 @@
 //
 
 import UIKit
+import WebKit
 import AVFoundation
 import AVKit
 
 class TrailerViewController: UIViewController {
     
-    var movieDetail: MovieDetail!
+    var movieDetail: MovieDetail?
+    var favoriteMovie: FavoriteMovie?
     var player: AVPlayer!
     var playerController: AVPlayerViewController!
     let network = NetworkManager.sharedInstance
     
     
     @IBOutlet weak var noTrailerLabel: UILabel!
-    @IBOutlet weak var playerTrailer: UIView!
+    
+    @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
+    
+    @IBOutlet weak var trailerView: WKWebView!
+    
+    
+    
     @IBOutlet weak var titleLabel: UILabel!
     
     @IBOutlet weak var overViewLabel: UILabel!
@@ -30,11 +38,12 @@ class TrailerViewController: UIViewController {
         
         testConnection()
         
-        self.titleLabel.text = movieDetail.title
-        self.overViewLabel.text = movieDetail.overview
+        self.titleLabel.text = movieDetail?.title
+        self.overViewLabel.text = movieDetail?.overview
+        self.trailerView.navigationDelegate = self
         
 
-        MovieREST.getMovieTrailer(id: movieDetail.id!, onComplete: { (trailer) in
+        MovieREST.getMovieTrailer(id: (movieDetail?.id!)!, onComplete: { (trailer) in
             DispatchQueue.main.async {
                 
                 if let trailer = trailer {
@@ -58,16 +67,10 @@ class TrailerViewController: UIViewController {
 
     func preparePlayer(keyVideo: String){
         
-        if let url = URL(string: "https://www.youtube.com/embed/\(keyVideo)"){
-
-            player = AVPlayer(url: url)
-            playerController = AVPlayerViewController()
-            playerController.player = player
-            playerController.showsPlaybackControls = true
-            playerController.player?.play()
-            playerController.view.frame = playerTrailer.bounds
-            playerTrailer.addSubview(playerController.view)
+        if let url = URL(string: "https://www.youtube.com/embed/\(keyVideo)") {
             
+            trailerView.load(URLRequest(url: url))
+
         }
     }
     
@@ -77,4 +80,12 @@ class TrailerViewController: UIViewController {
         }
     }
 
+}
+
+
+extension TrailerViewController: WKNavigationDelegate {
+    
+    func webView(_ webView: WKWebView, didFinish navigation: WKNavigation!) {
+        activityIndicator.stopAnimating()
+    }
 }

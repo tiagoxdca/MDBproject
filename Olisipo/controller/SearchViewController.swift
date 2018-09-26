@@ -29,6 +29,7 @@ class SearchViewController: UIViewController {
     
     @IBOutlet weak var noConnection: UIView!
     
+    @IBOutlet weak var labelsInfo: UIView!
     @IBOutlet weak var cTop: NSLayoutConstraint!
     
     @IBOutlet weak var selectionMoviesLabel: UILabel!
@@ -44,22 +45,23 @@ class SearchViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        testConnection()
-        self.loadNowPlaying()
         
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if isReachable {
-            self.noConnection.alpha = 0
-            self.loadTopRatedMovies()
-        } else {
-            self.noConnection.alpha = 1
+        NetworkManager.isUnreachable { (manager) in
+            self.isReachable = false
+            self.noConnection.isHidden = false
+            self.activityIndicator.stopAnimating()
         }
-        self.selectionMoviesLabel.text = "↓ Top Rated Movies"
-        noResultsLabel.alpha = 0
+        
+        testConnection()
         
     }
 
@@ -68,10 +70,13 @@ class SearchViewController: UIViewController {
     func loadNowPlaying(){
         
         if isReachable {
+            
             MovieREST.getNowPlaying(onComplete: { (movies) in
                 self.nowPlayingMovies = movies
                 self.loadImagesNowPlaying(movies: movies)
+                
                 DispatchQueue.main.async {
+                self.labelsInfo.isHidden = false
                    self.startAnimation()
                 }
                 
@@ -83,7 +88,7 @@ class SearchViewController: UIViewController {
     
     func startAnimation(){
         timer?.invalidate()
-        timer = Timer.scheduledTimer(withTimeInterval: 8, repeats: true, block: { (timer) in
+        timer = Timer.scheduledTimer(withTimeInterval: 5, repeats: true, block: { (timer) in
             
             self.showNextImage()
         })
@@ -97,6 +102,7 @@ class SearchViewController: UIViewController {
             if let data = try? Data(contentsOf: movie.getPosterURL()!) {
                 if let image = UIImage(data: data) {
                     self.imagesPlaying.append(image)
+                    self.activityIndicator.stopAnimating()
                 }
             }
         }
@@ -140,13 +146,22 @@ class SearchViewController: UIViewController {
     
     fileprivate func testConnection() {
         
+        
+        
         NetworkManager.isReachable { (manager) in
+            if self.moviesTopRated.count > 0 {
+                return
+            }
+            self.selectionMoviesLabel.text = "↓ Top Rated Movies"
+            self.noResultsLabel.alpha = 0
             self.isReachable = true
+            self.noConnection.isHidden = true
+            self.loadNowPlaying()
+            self.loadTopRatedMovies()
+
         }
         
-        NetworkManager.isUnreachable { (manager) in
-            self.isReachable = false
-        }
+        
         
         
         network.reachability.whenReachable = { _ in
@@ -154,13 +169,13 @@ class SearchViewController: UIViewController {
                 self.isReachable = true
                 self.loadNowPlaying()
                 self.loadTopRatedMovies()
-                self.noConnection.alpha = 0
+                self.noConnection.isHidden = true
             })
         }
         network.reachability.whenUnreachable = { reachability in
             UIView.animate(withDuration: 1, animations: {
                 self.isReachable = false
-                 self.noConnection.alpha = 1
+                self.noConnection.isHidden = false
             })
         }
     }
@@ -170,11 +185,14 @@ class SearchViewController: UIViewController {
     }
     
     func loadTopRatedMovies(){
+        self.activityIndicator.startAnimating()
         MovieREST.getTopRatedMovies(onComplete: { (movies) in
             DispatchQueue.main.async {
                 self.moviesTopRated = movies
                 self.collectionView.reloadData()
+                
                 self.collectionView.alpha = 1
+                self.activityIndicator.stopAnimating()
             }
         }) { (error) in
             ErrorHelper.showMovieError(controller: self, error: error)
@@ -186,7 +204,7 @@ class SearchViewController: UIViewController {
         if let navigationVC = segue.destination as? UINavigationController {
             if let detailVC = navigationVC.viewControllers.first as? MovieDetailViewController,
                 let index = collectionView.indexPathsForSelectedItems?.first {
-                    detailVC.movieDetail = moviesTopRated[index.item]
+                    detailVC.idMovie = moviesTopRated[index.item].id
             }
         }
     }
@@ -213,17 +231,27 @@ extension SearchViewController: UISearchBarDelegate, UICollectionViewDelegate, U
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchBar.resignFirstResponder()
         
+        if !isReachable {
+            self.noConnection.isHidden = false
+            return
+        }
+        self.collectionView.alpha = 0
+        self.activityIndicator.startAnimating()
+        
         MovieREST.getMovieByTitle(title: searchBar.text!, onComplete: { (movies) in
             self.moviesTopRated = movies
             DispatchQueue.main.async {
                 self.searchBar.text = ""
                 self.view.endEditing(true)
                 self.collectionView.reloadData()
+                
                 if self.moviesTopRated.count == 0 {
-                    UIView.animate(withDuration: 2, animations: {
+                    UIView.animate(withDuration: 1, animations: {
                         self.noResultsLabel.alpha = 1
+                        self.activityIndicator.stopAnimating()
                     })
                 } else {
+                    
                     self.updateLabelResults()
                 }
             }
@@ -239,11 +267,19 @@ extension SearchViewController: UISearchBarDelegate, UICollectionViewDelegate, U
         self.collectionView.alpha = 0
         self.noResultsLabel.alpha = 0
         self.selectionMoviesLabel.alpha = 0
-        UIView.animate(withDuration: 1.5, animations: {
+        self.labelsInfo.isHidden = false
+        
+        
+        UIView.animate(withDuration: 1.5, delay: 1, options: [], animations: {
             self.selectionMoviesLabel.alpha = 1
             self.collectionView.alpha = 1
-        })
+            
+        }) { (success) in
+            let indexPath = IndexPath(item: 0, section: 0)
+            self.collectionView.scrollToItem(at: indexPath, at: [.centeredVertically, .centeredHorizontally], animated: true)
+        }
         self.selectionMoviesLabel.text = "↓ your selection"
+        self.activityIndicator.stopAnimating()
     }
     
 }

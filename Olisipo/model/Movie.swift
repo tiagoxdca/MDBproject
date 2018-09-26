@@ -10,13 +10,13 @@ import Foundation
 
 class Movie: Codable {
     
-    var id: Int
-    var title: String
-    var video: Bool
-    var poster_path: String
-    var backdrop_path: String
-    var overview: String
-    var release_date: String
+    var id: Int?
+    var title: String?
+    var video: Bool?
+    var poster_path: String?
+    var backdrop_path: String?
+    var overview: String?
+    var release_date: String?
     
     
     init(id: Int, title: String, video: Bool, poster_path: String, backdrop_path: String, overview: String, release_date: String ) {
@@ -34,7 +34,7 @@ class Movie: Codable {
     }
     
     func getMovieURL() -> URL?{
-        return URL(string: "https://image.tmdb.org/t/p/w500\(poster_path)")
+        return URL(string: "https://image.tmdb.org/t/p/w500\(poster_path!)")
     }
     
 }

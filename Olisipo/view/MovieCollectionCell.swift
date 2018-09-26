@@ -15,17 +15,17 @@ class MovieCollectionCell: UICollectionViewCell {
     
     @IBOutlet weak var lbTitle: UILabel!
     
+    
+    
     func updateCell(movie: Movie){
         
-        guard let url = movie.getMovieURL() else {
-            return
-        }
+        
+        let image = UIImage(named: "placeholder")
+        let url = movie.getMovieURL() ?? nil
+        self.imageViewMovie.kf.setImage(with: url, placeholder: image)
+
         imageViewMovie.kf.indicatorType = .activity
-        imageViewMovie.kf.setImage(with: url)
-        lbTitle.text = "\(movie.title)"
         
-       
-        
-        
+        lbTitle.text = "\(movie.title!)"
     }
 }

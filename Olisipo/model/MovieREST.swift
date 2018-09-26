@@ -43,32 +43,21 @@ class MovieREST {
     class func getMovieDetailsById(id: Int, onComplete: @escaping (MovieDetail) -> Void, onError: @escaping (MovieError) -> Void){
         
         guard let url = getUrlMovieDetail(id: id) else { onError(.url); return}
-        let dataTask = session.dataTask(with: url){ (data:Data?, response: URLResponse?, error:Error?) in
+        
+        Alamofire.request(url).response { (response) in
             
-            if error == nil {
-                guard let response = response as? HTTPURLResponse else {
-                    onError(.noResponse)
-                    return}
-                if response.statusCode == 200 {
-                    guard let data = data else {return}
-                    do{
-                        let movieDetail = try JSONDecoder().decode(MovieDetail.self, from:data)
-                        
-                        onComplete(movieDetail)
-                        
-                    } catch {
-                        onError(.invalidJSON)
-                    }
-                    
-                } else{
-                    onError(.responseStatusCode(code: response.statusCode))
-                }
-            }else {
-                onError(.taskError(error: error!))
+            
+            guard let data = response.data,
+                let movies = try? JSONDecoder().decode(MovieDetail.self, from: data) else {
+                    onError(.invalidJSON)
+                    return
             }
+            
+            onComplete(movies)
+            
         }
         
-        dataTask.resume()
+
 
     }
     
@@ -78,33 +67,22 @@ class MovieREST {
             return
         }
         
-        let dataTask = session.dataTask(with: url){ (data:Data?, response: URLResponse?, error:Error?) in
+        Alamofire.request(url).response { (response) in
             
             
-            
-            if error == nil {
-                guard let response = response as? HTTPURLResponse else {
-                    onError(.noResponse)
-                    return}
-                if response.statusCode == 200 {
-                    guard let data = data else {return}
-                    do{
-                        let movieDetail = try JSONDecoder().decode(MovieResponseDetail.self, from:data).results
-                        onComplete(movieDetail)
-                        
-                    } catch {
-                        onError(.invalidJSON)
-                    }
-                    
-                } else{
-                    onError(.responseStatusCode(code: response.statusCode))
-                }
-            }else {
-                onError(.taskError(error: error!))
+            guard let data = response.data,
+                let movies = try? JSONDecoder().decode(MovieResponseDetail.self, from: data).results else {
+                    onError(.invalidJSON)
+                    return
             }
+            
+            onComplete(movies)
+            
         }
         
-        dataTask.resume()
+        
+        
+
     }
     
     class func getNowPlaying(onComplete: @escaping ([MovieDetail]) -> Void, onError: @escaping (MovieError) -> Void){
@@ -151,32 +129,18 @@ class MovieREST {
             onError(.url)
             return}
         
-        let dataTask = session.dataTask(with: url) { (data:Data?, response: URLResponse?, error:Error?) in
+        Alamofire.request(url).response { (response) in
             
-            if error == nil {
-                guard let response = response as? HTTPURLResponse else {
-                    onError(.noResponse)
-                    return}
-                if response.statusCode == 200 {
-                    guard let data = data else {return}
-                    do{
-                        let movies = try JSONDecoder().decode(MovieResponse.self, from:data).results
-                        
-                        onComplete(movies)
-                        
-                    } catch {
-                        onError(.invalidJSON)
-                    }
-                    
-                } else{
-                    onError(.responseStatusCode(code: response.statusCode))
-                }
-            }else {
-                onError(.taskError(error: error!))
+            
+            guard let data = response.data,
+                let movies = try? JSONDecoder().decode(MovieResponse.self, from: data).results else {
+                    onError(.invalidJSON)
+                    return
             }
+            
+            onComplete(movies)
+            
         }
-        
-        dataTask.resume()
         
     }
     

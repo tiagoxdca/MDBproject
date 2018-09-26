@@ -53,7 +53,7 @@ class LastReleasesViewController: UIViewController {
         if let navigationVC = segue.destination as? UINavigationController {
             if let detailVC = navigationVC.viewControllers.first as? MovieDetailViewController,
                 let index = collectionView.indexPathsForSelectedItems?.first {
-                detailVC.movie = self.movies[index.item]
+                detailVC.idMovie = self.movies[index.item].id
             }
         }
     }
@@ -79,6 +79,7 @@ class LastReleasesViewController: UIViewController {
         }
         
         network.reachability.whenUnreachable = { reachability in
+            self.activityIndicator.stopAnimating()
             UIView.animate(withDuration: 1, animations: {
                 self.collectionView.alpha = 0
                 self.imgNoConnection.alpha = 1
@@ -90,10 +91,11 @@ class LastReleasesViewController: UIViewController {
     fileprivate func showLastReleases() {
         MovieREST.getLastReleases(onComplete: { (movies) in
             self.movies = movies
+            
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
                 self.activityIndicator.stopAnimating()
-                self.loadAnimation()
+                //self.loadAnimation()
             }
             
         }) { (error) in
